@@ -1,14 +1,8 @@
 package com.example.kanjiapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +11,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
 import com.example.kanjiapplication.databases.tables.INFO;
@@ -54,7 +52,7 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
         Intent intent = getIntent();
-        String _listKanji = (String)intent.getSerializableExtra("listKanji");
+        String _listKanji = (String) intent.getSerializableExtra("listKanji");
         context = this;
         pointer = 0;
         maxPointer = _listKanji.length() - 1;
@@ -152,6 +150,7 @@ public class InformationActivity extends AppCompatActivity {
             reDraw();
         }
     }
+
     private void previousKanji(View view) {
         if (pointer > 0) {
             pointer--;

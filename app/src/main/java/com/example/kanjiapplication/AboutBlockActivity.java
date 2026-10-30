@@ -1,8 +1,5 @@
 package com.example.kanjiapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +8,9 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.kanjiapplication.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
 import com.example.kanjiapplication.databases.DBOwnGroupsAccess;
 import com.example.kanjiapplication.databases.tables.GROUPS;
@@ -30,8 +29,8 @@ public class AboutBlockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_block);
-        level = (String)this.getIntent().getSerializableExtra("level");
-        group = (String)this.getIntent().getSerializableExtra("group");
+        level = (String) this.getIntent().getSerializableExtra("level");
+        group = (String) this.getIntent().getSerializableExtra("group");
         linearLayoutAboutBlocks = findViewById(R.id.linearLayoutAboutBlocks);
         textLevelAboutBlock = findViewById(R.id.textLevelAboutBlock);
         textGroupAboutBlock = findViewById(R.id.textGroupAboutBlock);
@@ -44,8 +43,7 @@ public class AboutBlockActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             });
-        }
-        else {
+        } else {
             textLevelAboutBlock.setText(level);
             buttonAddKanjiAboutBlock.setVisibility(View.GONE);
         }
@@ -53,8 +51,7 @@ public class AboutBlockActivity extends AppCompatActivity {
         if (isOwnGroup) {
             DBOwnGroupsAccess dbOwnGroupsAccess = new DBOwnGroupsAccess(this);
             groups = dbOwnGroupsAccess.getGroup(group);
-        }
-        else {
+        } else {
             DBKanjiInfoAccess dbKanjiInfoAccess = new DBKanjiInfoAccess(this);
             groups = dbKanjiInfoAccess.getGroup(level, group);
         }

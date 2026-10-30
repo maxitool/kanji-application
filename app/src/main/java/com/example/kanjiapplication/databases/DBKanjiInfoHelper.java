@@ -31,7 +31,9 @@ public class DBKanjiInfoHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {int i = 0;}
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        int i = 0;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -46,13 +48,13 @@ public class DBKanjiInfoHelper extends SQLiteOpenHelper {
         super.close();
     }
 
-    public void copyDataBase() throws IOException{
+    public void copyDataBase() throws IOException {
         try {
             InputStream myInput = context.getAssets().open(DB_NAME);
             OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);
             byte[] buffer = new byte[1024];
             int length;
-            while((length = myInput.read(buffer)) > 0){
+            while ((length = myInput.read(buffer)) > 0) {
                 myOutput.write(buffer, 0, length);
             }
             myOutput.flush();
@@ -63,7 +65,7 @@ public class DBKanjiInfoHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void openDataBase() throws SQLException{
+    public void openDataBase() throws SQLException {
         String myPath = DB_PATH + DB_NAME;
         database = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }

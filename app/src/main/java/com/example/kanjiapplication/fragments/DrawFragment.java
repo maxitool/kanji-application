@@ -4,13 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.kanjiapplication.R;
 import com.example.kanjiapplication.imagetransformation.SearchExtremePoints;
 import com.example.kanjiapplication.threads.MyThreads;
@@ -145,7 +144,7 @@ public class DrawFragment extends Fragment {
         //Stop draw panel and draw threads
         isDrawable = false;
         if (COUNT_PROCESSORS > 1)
-            for (int i = threadsList.size() - 1; i >=0; i--) {
+            for (int i = threadsList.size() - 1; i >= 0; i--) {
                 threadsList.get(i).interrupt();
                 threadsList.remove(i);
             }
@@ -169,8 +168,7 @@ public class DrawFragment extends Fragment {
                 threadsList.get(i).interrupt();
                 threadsList.remove(i);
             }
-        }
-        else {
+        } else {
             SearchExtremePoints searchExtremePoints = new SearchExtremePoints(height, width, pixels);
             extremePoints[0] = searchExtremePoints.searchExtremePoint("left");
             extremePoints[1] = searchExtremePoints.searchExtremePoint("right");
@@ -204,18 +202,16 @@ public class DrawFragment extends Fragment {
                 threadsList.get(i).interrupt();
                 threadsList.remove(i);
             }
-        }
-        else
-        {
+        } else {
             for (int i = 0; i < realHeight; i++)
                 for (int j = 0; j < realWidth; j++)
-                    image[i][j] = (float)(-pixels[(extremePoints[2] + i) * width + extremePoints[0] + j] - MIN_COLOR) / (float)MAX_COLOR;
+                    image[i][j] = (float) (-pixels[(extremePoints[2] + i) * width + extremePoints[0] + j] - MIN_COLOR) / (float) MAX_COLOR;
         }
         //Normalization with native method
         float[][] normalizedImage = normalization(image);
         //Image array to string for send
         String stringImage = "";
-        int lengthNormImage = (int)Math.sqrt(normalizedImage.length);
+        int lengthNormImage = (int) Math.sqrt(normalizedImage.length);
         if (COUNT_PROCESSORS > 1) {
             commonCountPartitionStreams = lengthNormImage / COUNT_PROCESSORS;
             remainder = lengthNormImage - commonCountPartitionStreams * COUNT_PROCESSORS;
@@ -236,11 +232,10 @@ public class DrawFragment extends Fragment {
                 threadsList.get(i).interrupt();
                 threadsList.remove(i);
             }
-        }
-        else {
+        } else {
             for (int i = 0; i < lengthNormImage; i++)
                 for (int j = 0; j < lengthNormImage; j++)
-                    stringImage += String.format("%.2f", normalizedImage[i][j]).replace(".","");
+                    stringImage += String.format("%.2f", normalizedImage[i][j]).replace(".", "");
         }
         //Resume draw panel and draw threads
         for (int i = 0; i < COUNT_PROCESSORS; i++)
@@ -254,7 +249,9 @@ public class DrawFragment extends Fragment {
         imageViewDraw.setImageBitmap(bitmap);
     }
 
-    public Bitmap getBitmap() { return bitmap; }
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
 
     private boolean eventListener(View view, MotionEvent event) {
         if (isDrawable) {
@@ -278,13 +275,11 @@ public class DrawFragment extends Fragment {
 
     private void BitmapChangeDown() {
         if ((int) points[0] >= (locationViewDraw[0] - globalLocation[0]) && points[1] >= (locationViewDraw[1] - globalLocation[1]) && (int) points[0] < (locationViewDraw[0] - globalLocation[0] + width) && (int) points[1] < (locationViewDraw[1] - globalLocation[1] + height)) {
-            points[0] -= (float) locationViewDraw[0] - (float)globalLocation[0];
-            points[1] -= (float) locationViewDraw[1] - (float)globalLocation[1];
+            points[0] -= (float) locationViewDraw[0] - (float) globalLocation[0];
+            points[1] -= (float) locationViewDraw[1] - (float) globalLocation[1];
             canvas.drawCircle(points[0], points[1], widthBrush, paint);
             imageViewDraw.setImageBitmap(bitmap);
-        }
-        else
-        {
+        } else {
             points[0] = -1.0f;
             points[1] = -1.0f;
         }
@@ -292,22 +287,20 @@ public class DrawFragment extends Fragment {
 
     private void BitmapChangeMove() {
         if ((int) points[2] >= (locationViewDraw[0] - globalLocation[0]) && points[3] >= (locationViewDraw[1] - globalLocation[1]) && (int) points[2] < (locationViewDraw[0] - globalLocation[0] + width) && (int) points[3] < (locationViewDraw[1] - globalLocation[1] + height)) {
-            points[2] -= (float) locationViewDraw[0] - (float)globalLocation[0];
-            points[3] -= (float) locationViewDraw[1] - (float)globalLocation[1];
+            points[2] -= (float) locationViewDraw[0] - (float) globalLocation[0];
+            points[3] -= (float) locationViewDraw[1] - (float) globalLocation[1];
             drawCircles();
             imageViewDraw.setImageBitmap(bitmap);
             points[0] = points[2];
             points[1] = points[3];
-        }
-        else
-        {
+        } else {
             points[0] = points[2];
             points[1] = points[3];
         }
     }
 
     private void drawCircles() {
-        countSteps = (int)Math.sqrt((points[0] - points[2]) * (points[0] - points[2]) + (points[1] - points[3]) * (points[1] - points[3]));
+        countSteps = (int) Math.sqrt((points[0] - points[2]) * (points[0] - points[2]) + (points[1] - points[3]) * (points[1] - points[3]));
         if (countSteps > 1) {
             steps[0] = Math.abs(points[0] - points[2]) / (float) countSteps;
             steps[1] = Math.abs(points[1] - points[3]) / (float) countSteps;
@@ -321,8 +314,7 @@ public class DrawFragment extends Fragment {
                         threadsList.get(i).setSettings(commonCountPartitionStreams, points, steps);
                 for (int i = 0; i < threadsList.size(); i++)
                     threadsList.get(i).run();
-            }
-            else {
+            } else {
                 for (int i = 0; i < countSteps; i++) {
                     if (points[0] == points[2])
                         pointSteps[0] = points[0];
@@ -343,8 +335,7 @@ public class DrawFragment extends Fragment {
                     canvas.drawCircle(pointSteps[0], pointSteps[1], widthBrush, paint);
                 }
             }
-        }
-        else
+        } else
             canvas.drawCircle(points[2], points[3], widthBrush, paint);
     }
 }

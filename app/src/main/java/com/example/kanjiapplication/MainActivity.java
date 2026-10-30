@@ -1,8 +1,5 @@
 package com.example.kanjiapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +7,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.kanjiapplication.fragments.DrawFragment;
-import com.example.kanjiapplication.fragments.SequentialDrawFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchKanji(View view) throws InterruptedException, IOException {
         String image = drawFragment.getImage();
-        if (image== "") {
+        if (image == "") {
             Toast.makeText(this, "Paint panel is empty", Toast.LENGTH_LONG).show();
             return;
         }

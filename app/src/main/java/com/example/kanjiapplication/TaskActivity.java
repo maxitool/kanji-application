@@ -1,9 +1,5 @@
 package com.example.kanjiapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -20,15 +16,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
-import com.example.kanjiapplication.databases.tables.INFO;
 import com.example.kanjiapplication.databases.tables.TASKS;
 import com.example.kanjiapplication.fragments.DrawFragment;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
 public class TaskActivity extends AppCompatActivity {
@@ -53,7 +49,7 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         Intent intent = getIntent();
-        String _listKanji = (String)intent.getSerializableExtra("listKanji");
+        String _listKanji = (String) intent.getSerializableExtra("listKanji");
         listKanji = _listKanji.toCharArray();
         textFuriganaTask = findViewById(R.id.textFuriganaTask);
         textWordTask = findViewById(R.id.textWordTask);
@@ -82,7 +78,7 @@ public class TaskActivity extends AppCompatActivity {
     public void checkAction(View view) throws IOException, InterruptedException {
         result = "Unknown";
         String image = drawFragment.getImage();
-        if (image== "") {
+        if (image == "") {
             Toast.makeText(this, "Paint panel is empty", Toast.LENGTH_LONG).show();
             return;
         }
@@ -148,9 +144,10 @@ public class TaskActivity extends AppCompatActivity {
     }
 
     private void reDraw() {
-        randomTask();;
+        randomTask();
+        ;
         setPositionKanji();
-        Spannable spannable = new SpannableString(task.FURIGANA.replaceAll("\\s+",""));
+        Spannable spannable = new SpannableString(task.FURIGANA.replaceAll("\\s+", ""));
         spannable.setSpan(new ForegroundColorSpan(Color.RED), startPosFurigana, endPosFurigana, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         textFuriganaTask.setText(spannable, TextView.BufferType.SPANNABLE);
         spannable = new SpannableString(replaceWord());
@@ -162,12 +159,12 @@ public class TaskActivity extends AppCompatActivity {
 
     private String replaceWord() {
         char[] word = task.WORD.toCharArray();
-        char[] furigana = task.FURIGANA.replaceAll("\\s+","").toCharArray();
+        char[] furigana = task.FURIGANA.replaceAll("\\s+", "").toCharArray();
         String result = "";
         int pointerBegin = 0, pointerEnd = 0;
         for (int i = 0; i < positionKanji; i++) {
             result += word[i];
-            pointerBegin ++;
+            pointerBegin++;
         }
         pointerEnd = pointerBegin;
         for (int i = startPosFurigana; i < endPosFurigana; i++) {
@@ -223,14 +220,14 @@ public class TaskActivity extends AppCompatActivity {
         if (listKanji.length > 1) {
             char[] listKanjiTemp = new char[listKanji.length];
             int pointer;
-            for (int i = 0; i < listKanjiTemp.length/2; i++) {
+            for (int i = 0; i < listKanjiTemp.length / 2; i++) {
                 do {
-                    pointer = (int)(Math.random() * listKanjiTemp.length);
+                    pointer = (int) (Math.random() * listKanjiTemp.length);
                 } while (listKanjiTemp[pointer] != 0);
                 listKanjiTemp[pointer] = listKanji[i];
             }
             pointer = 0;
-            for (int i = listKanjiTemp.length/2; i < listKanjiTemp.length; i++)
+            for (int i = listKanjiTemp.length / 2; i < listKanjiTemp.length; i++)
                 for (int j = pointer; j < listKanjiTemp.length; j++)
                     if (listKanjiTemp[j] == 0) {
                         listKanjiTemp[j] = listKanji[i];
@@ -245,7 +242,7 @@ public class TaskActivity extends AppCompatActivity {
 
     private void randomTask() {
         List<TASKS> tasks = dbKanjiInfoAccess.getTasksKanji(listKanji[pointerKanji]);
-        int pointer = (int)(Math.random() * tasks.size());
+        int pointer = (int) (Math.random() * tasks.size());
         task = tasks.get(pointer);
     }
 }

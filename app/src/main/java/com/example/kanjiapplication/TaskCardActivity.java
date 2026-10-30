@@ -2,17 +2,16 @@ package com.example.kanjiapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
 import com.example.kanjiapplication.databases.tables.INFO;
 import com.example.kanjiapplication.fragments.SequentialDrawFragment;
 import com.google.android.material.navigation.NavigationView;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import androidx.fragment.app.FragmentTransaction;
 
 public class TaskCardActivity extends AppCompatActivity {
     private SequentialDrawFragment drawFragment;

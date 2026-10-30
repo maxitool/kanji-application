@@ -98,10 +98,10 @@ public class DBKanjiInfoAccess {
         GROUPS groups = new GROUPS();
         cursor = sqLiteDatabase.rawQuery("SELECT * FROM MAIN_GROUPS WHERE LEVEL = '" + level + "' AND NAME = '" + group + "' ORDER BY ID", null);
         if (cursor.moveToFirst()) {
-                groups.ID = Integer.parseInt(cursor.getString(0));
-                groups.NAME = cursor.getString(2);
-                groups.LIST_KANJI = cursor.getString(3);
-            }
+            groups.ID = Integer.parseInt(cursor.getString(0));
+            groups.NAME = cursor.getString(2);
+            groups.LIST_KANJI = cursor.getString(3);
+        }
         cursor.close();
         return groups;
     }

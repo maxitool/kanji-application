@@ -1,15 +1,14 @@
 package com.example.kanjiapplication.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.kanjiapplication.R;
 import com.example.kanjiapplication.databases.tables.TASKS;
@@ -30,7 +29,7 @@ public class InfoItemFragment extends Fragment {
         textRomaji = view.findViewById(R.id.textRomaji);
         textWord = view.findViewById(R.id.textWord);
         textTranslation = view.findViewById(R.id.textTranslation);
-        textFurigana.setText(tasks.FURIGANA.replaceAll("\\s+",""));
+        textFurigana.setText(tasks.FURIGANA.replaceAll("\\s+", ""));
         textRomaji.setText(tasks.ROMAJI);
         textWord.setText(tasks.WORD);
         textTranslation.setText(tasks.TRANSLATION);

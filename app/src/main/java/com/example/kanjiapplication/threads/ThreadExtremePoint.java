@@ -4,7 +4,7 @@ import com.example.kanjiapplication.imagetransformation.SearchExtremePoints;
 
 import java.util.concurrent.CountDownLatch;
 
-public class ThreadExtremePoint extends  MyThreads{
+public class ThreadExtremePoint extends MyThreads {
 
     private CountDownLatch countDownLatch;
     private SearchExtremePoints searchExtremePoints;
@@ -19,7 +19,9 @@ public class ThreadExtremePoint extends  MyThreads{
     }
 
     @Override
-    public int getExtremePoint() { return extremePoint; }
+    public int getExtremePoint() {
+        return extremePoint;
+    }
 
     @Override
     public void run() {
@@ -27,8 +29,7 @@ public class ThreadExtremePoint extends  MyThreads{
         extremePoint = searchExtremePoints.searchExtremePoint(direction);
         try {
             countDownLatch.countDown();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

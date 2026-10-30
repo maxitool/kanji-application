@@ -1,8 +1,6 @@
 package com.example.kanjiapplication.threads;
 
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.CyclicBarrier;
 
 public class ThreadColorArray extends MyThreads {
 
@@ -35,11 +33,10 @@ public class ThreadColorArray extends MyThreads {
         for (int i = 0; i < countRows; i++)
             for (int j = 0; j < realWidth; j++)
                 image[i * countProcessors + numberThread][j] =
-                        (float)(-pixels[(extremePoints[2] + i * countProcessors + numberThread) * width + extremePoints[0] + j] - MIN_COLOR) / (float)MAX_COLOR;
+                        (float) (-pixels[(extremePoints[2] + i * countProcessors + numberThread) * width + extremePoints[0] + j] - MIN_COLOR) / (float) MAX_COLOR;
         try {
             countDownLatch.countDown();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

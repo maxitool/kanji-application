@@ -1,14 +1,13 @@
 package com.example.kanjiapplication;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
 import com.example.kanjiapplication.databases.tables.GROUPS;
@@ -33,7 +32,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_block);
         Intent intent = getIntent();
-        level = (String)intent.getSerializableExtra("level");
+        level = (String) intent.getSerializableExtra("level");
         fragmentManager = getSupportFragmentManager();
         linearLayoutBlocks = findViewById(R.id.linearLayoutBlocks);
         dbKanjiInfoAccess = new DBKanjiInfoAccess(this);
@@ -42,7 +41,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
     }
 
     private void setImagesFragments() {
-        int countRows = (int)Math.ceil((double)listGroups.size() / (double)COUNT_GROUPS_IN_ROW);
+        int countRows = (int) Math.ceil((double) listGroups.size() / (double) COUNT_GROUPS_IN_ROW);
         int countGroups = listGroups.size();
         int count;
         for (int i = 0; i < countRows; i++) {
@@ -63,7 +62,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
                 fm.replace(i * COUNT_GROUPS_IN_ROW + j + 1, imageBlockFragment);
                 fm.commit();
             }
-            countGroups  -= COUNT_GROUPS_IN_ROW;
+            countGroups -= COUNT_GROUPS_IN_ROW;
         }
     }
 }

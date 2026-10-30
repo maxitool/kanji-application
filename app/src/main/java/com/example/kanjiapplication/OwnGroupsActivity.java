@@ -1,9 +1,5 @@
 package com.example.kanjiapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,11 +12,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.example.kanjiapplication.databases.DBOwnGroupsAccess;
 import com.example.kanjiapplication.databases.tables.GROUPS;
 import com.example.kanjiapplication.fragments.ImageBlockFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class OwnGroupsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_own_groups);
-        char[] _kanji = ((String)this.getIntent().getSerializableExtra("kanji")).toCharArray();
+        char[] _kanji = ((String) this.getIntent().getSerializableExtra("kanji")).toCharArray();
         if (_kanji.length != 0)
             kanji = _kanji[0];
         dbOwnGroupsAccess = new DBOwnGroupsAccess(this);
@@ -69,15 +67,14 @@ public class OwnGroupsActivity extends AppCompatActivity {
                     startActivity(getIntent());
                 } else
                     Toast.makeText(this, "Cant add group to database (this name is already exists)", Toast.LENGTH_LONG).show();
-            }
-            else
+            } else
                 Toast.makeText(this, "Text field is empty", Toast.LENGTH_LONG).show();
         });
         dialog.show();
     }
 
     private void setImagesFragments() {
-        int countRows = (int)Math.ceil((double)listGroups.size() / (double)COUNT_GROUPS_IN_ROW);
+        int countRows = (int) Math.ceil((double) listGroups.size() / (double) COUNT_GROUPS_IN_ROW);
         int countGroups = listGroups.size();
         int count;
         for (int i = 0; i < countRows; i++) {
@@ -96,14 +93,13 @@ public class OwnGroupsActivity extends AppCompatActivity {
                 if (kanji != 0) {
                     imageBlockFragment = new ImageBlockFragment("Own", listGroups.get(i * COUNT_GROUPS_IN_ROW + j), true);
                     imageBlockFragment.setKanji(kanji);
-                }
-                else
+                } else
                     imageBlockFragment = new ImageBlockFragment("Own", listGroups.get(i * COUNT_GROUPS_IN_ROW + j), false);
                 FragmentTransaction fm = fragmentManager.beginTransaction();
                 fm.replace(i * COUNT_GROUPS_IN_ROW + j + 1, imageBlockFragment);
                 fm.commit();
             }
-            countGroups  -= COUNT_GROUPS_IN_ROW;
+            countGroups -= COUNT_GROUPS_IN_ROW;
         }
     }
 }

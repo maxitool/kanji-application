@@ -3,18 +3,12 @@ package com.example.kanjiapplication.fragments;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.graphics.Movie;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -23,17 +17,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.kanjiapplication.DrawDataKanji;
 import com.example.kanjiapplication.R;
-import com.example.kanjiapplication.imagetransformation.SearchExtremePoints;
 import com.example.kanjiapplication.threads.MyThreads;
-import com.example.kanjiapplication.threads.ThreadColorArray;
 import com.example.kanjiapplication.threads.ThreadDraw;
-import com.example.kanjiapplication.threads.ThreadExtremePoint;
-import com.example.kanjiapplication.threads.ThreadString;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
@@ -153,8 +142,7 @@ public class SequentialDrawFragment extends Fragment {
                 isShowBackKanji = false;
                 gifViewLayer.setVisibility(View.INVISIBLE);
                 imageViewSetLayer.setImageResource(R.drawable.baseline_layers_24);
-            }
-            else {
+            } else {
                 isShowBackKanji = true;
                 gifViewLayer.setVisibility(View.VISIBLE);
                 imageViewSetLayer.setImageResource(R.drawable.baseline_layers_clear_24);
@@ -197,15 +185,15 @@ public class SequentialDrawFragment extends Fragment {
             Paint h = new Paint();
             //draw dash lines
             for (int i = 0; i < COUNT_DASH_LINES_IN_SIDE; i++)
-                if (i == COUNT_DASH_LINES_IN_SIDE/2)
-                    drawDashLine(true,SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 127);
+                if (i == COUNT_DASH_LINES_IN_SIDE / 2)
+                    drawDashLine(true, SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 127);
                 else
-                    drawDashLine(true,SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 63);
+                    drawDashLine(true, SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 63);
             for (int i = 0; i < COUNT_DASH_LINES_IN_SIDE; i++)
-                if (i == COUNT_DASH_LINES_IN_SIDE/2)
-                    drawDashLine(false,SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 127);
+                if (i == COUNT_DASH_LINES_IN_SIDE / 2)
+                    drawDashLine(false, SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 127);
                 else
-                    drawDashLine(false,SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 63);
+                    drawDashLine(false, SIZE_SIDE_PANEL / (COUNT_DASH_LINES_IN_SIDE + 1) * (i + 1), 63);
             gifView.getLayoutParams().height = height;
             gifViewHalf.getLayoutParams().height = height;
             gifViewLayer.getLayoutParams().height = height;
@@ -230,7 +218,9 @@ public class SequentialDrawFragment extends Fragment {
             return false;
     }
 
-    public int getCountFeatures() { return infoFeaturesKanji.countFeatures; }
+    public int getCountFeatures() {
+        return infoFeaturesKanji.countFeatures;
+    }
 
     private void changeGifsSeek() {
         if (currentFeature < infoFeaturesKanji.countFeatures) {
@@ -239,7 +229,7 @@ public class SequentialDrawFragment extends Fragment {
         }
     }
 
-    private void drawDashLine ( boolean type, int padding, int opacity){
+    private void drawDashLine(boolean type, int padding, int opacity) {
         if (opacity < 0 || opacity > 255)
             return;
         if (padding > SIZE_SIDE_PANEL * scaleSizeSide)
@@ -253,43 +243,43 @@ public class SequentialDrawFragment extends Fragment {
         if (type) { // false - horizontal line, true - vertical line
             for (int i = 0; i < countLines / 2; i++) {
 
-                canvas.drawRect((padding - WIDTH_LINE/2) * scaleSizeSide, i * (LENGTH_LINE + INDENTATION) * scaleSizeSide,
-                        (padding + WIDTH_LINE/2) * scaleSizeSide,
+                canvas.drawRect((padding - WIDTH_LINE / 2) * scaleSizeSide, i * (LENGTH_LINE + INDENTATION) * scaleSizeSide,
+                        (padding + WIDTH_LINE / 2) * scaleSizeSide,
                         (i * (LENGTH_LINE + INDENTATION) + LENGTH_LINE) * scaleSizeSide, mpaint);
 
             }
 
             for (int i = 0; i < countLines / 2; i++) {
 
-                canvas.drawRect((padding - WIDTH_LINE/2) * scaleSizeSide, (SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION)) * scaleSizeSide,
-                        (padding + WIDTH_LINE/2) * scaleSizeSide,
+                canvas.drawRect((padding - WIDTH_LINE / 2) * scaleSizeSide, (SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION)) * scaleSizeSide,
+                        (padding + WIDTH_LINE / 2) * scaleSizeSide,
                         (SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION) - LENGTH_LINE) * scaleSizeSide, mpaint);
 
             }
 
-            canvas.drawRect((padding - WIDTH_LINE/2) * scaleSizeSide, (SIZE_SIDE_PANEL/2 - WIDTH_LINE/2) * scaleSizeSide,
-                    (padding + WIDTH_LINE/2) * scaleSizeSide,
-                    (SIZE_SIDE_PANEL/2 + WIDTH_LINE/2) * scaleSizeSide, mpaint);
+            canvas.drawRect((padding - WIDTH_LINE / 2) * scaleSizeSide, (SIZE_SIDE_PANEL / 2 - WIDTH_LINE / 2) * scaleSizeSide,
+                    (padding + WIDTH_LINE / 2) * scaleSizeSide,
+                    (SIZE_SIDE_PANEL / 2 + WIDTH_LINE / 2) * scaleSizeSide, mpaint);
         } else {
             for (int i = 0; i < countLines / 2; i++) {
 
-                canvas.drawRect(i * (LENGTH_LINE + INDENTATION) * scaleSizeSide, (padding - WIDTH_LINE/2) * scaleSizeSide,
+                canvas.drawRect(i * (LENGTH_LINE + INDENTATION) * scaleSizeSide, (padding - WIDTH_LINE / 2) * scaleSizeSide,
                         (i * (LENGTH_LINE + INDENTATION) + LENGTH_LINE) * scaleSizeSide,
-                        (padding + WIDTH_LINE/2) * scaleSizeSide, mpaint);
+                        (padding + WIDTH_LINE / 2) * scaleSizeSide, mpaint);
 
             }
 
             for (int i = 0; i < countLines / 2; i++) {
 
-                canvas.drawRect((SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION)) * scaleSizeSide, (padding - WIDTH_LINE/2) * scaleSizeSide,
+                canvas.drawRect((SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION)) * scaleSizeSide, (padding - WIDTH_LINE / 2) * scaleSizeSide,
                         (SIZE_SIDE_PANEL - i * (LENGTH_LINE + INDENTATION) - LENGTH_LINE) * scaleSizeSide,
-                        (padding + WIDTH_LINE/2) * scaleSizeSide, mpaint);
+                        (padding + WIDTH_LINE / 2) * scaleSizeSide, mpaint);
 
             }
 
-            canvas.drawRect((SIZE_SIDE_PANEL/2 - WIDTH_LINE/2) * scaleSizeSide, (padding+WIDTH_LINE/2) * scaleSizeSide,
-                    (SIZE_SIDE_PANEL/2 + WIDTH_LINE/2) * scaleSizeSide,
-                    (padding + WIDTH_LINE/2) * scaleSizeSide, mpaint);
+            canvas.drawRect((SIZE_SIDE_PANEL / 2 - WIDTH_LINE / 2) * scaleSizeSide, (padding + WIDTH_LINE / 2) * scaleSizeSide,
+                    (SIZE_SIDE_PANEL / 2 + WIDTH_LINE / 2) * scaleSizeSide,
+                    (padding + WIDTH_LINE / 2) * scaleSizeSide, mpaint);
 
         }
 
@@ -328,8 +318,7 @@ public class SequentialDrawFragment extends Fragment {
                             } else if (!checkLengthLine(getLengthFromLengthXY()))
                                 isLengthTooLong = true;
                         }
-                    }
-                    catch (Exception ex) {
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                     return true;
@@ -355,13 +344,11 @@ public class SequentialDrawFragment extends Fragment {
 
     private void BitmapChangeDown() {
         if ((int) points[0] >= (locationViewDraw[0] - globalLocation[0]) && points[1] >= (locationViewDraw[1] - globalLocation[1]) && (int) points[0] < (locationViewDraw[0] - globalLocation[0] + width) && (int) points[1] < (locationViewDraw[1] - globalLocation[1] + height)) {
-            points[0] -= (float) locationViewDraw[0] - (float)globalLocation[0];
-            points[1] -= (float) locationViewDraw[1] - (float)globalLocation[1];
+            points[0] -= (float) locationViewDraw[0] - (float) globalLocation[0];
+            points[1] -= (float) locationViewDraw[1] - (float) globalLocation[1];
             canvas.drawCircle(points[0], points[1], widthBrush, paint);
             imageViewDraw.setImageBitmap(bitmap);
-        }
-        else
-        {
+        } else {
             points[0] = -1.0f;
             points[1] = -1.0f;
         }
@@ -369,22 +356,20 @@ public class SequentialDrawFragment extends Fragment {
 
     private void BitmapChangeMove() {
         if ((int) points[2] >= (locationViewDraw[0] - globalLocation[0]) && points[3] >= (locationViewDraw[1] - globalLocation[1]) && (int) points[2] < (locationViewDraw[0] - globalLocation[0] + width) && (int) points[3] < (locationViewDraw[1] - globalLocation[1] + height)) {
-            points[2] -= (float) locationViewDraw[0] - (float)globalLocation[0];
-            points[3] -= (float) locationViewDraw[1] - (float)globalLocation[1];
+            points[2] -= (float) locationViewDraw[0] - (float) globalLocation[0];
+            points[3] -= (float) locationViewDraw[1] - (float) globalLocation[1];
             drawCircles();
             imageViewDraw.setImageBitmap(bitmap);
             points[0] = points[2];
             points[1] = points[3];
-        }
-        else
-        {
+        } else {
             points[0] = points[2];
             points[1] = points[3];
         }
     }
 
     private void drawCircles() {
-        countSteps = (int)Math.sqrt((points[0] - points[2]) * (points[0] - points[2]) + (points[1] - points[3]) * (points[1] - points[3]));
+        countSteps = (int) Math.sqrt((points[0] - points[2]) * (points[0] - points[2]) + (points[1] - points[3]) * (points[1] - points[3]));
         if (countSteps > 1) {
             steps[0] = Math.abs(points[0] - points[2]) / (float) countSteps;
             steps[1] = Math.abs(points[1] - points[3]) / (float) countSteps;
@@ -398,8 +383,7 @@ public class SequentialDrawFragment extends Fragment {
                         threadsList.get(i).setSettings(commonCountPartitionStreams, points, steps);
                 for (int i = 0; i < threadsList.size(); i++)
                     threadsList.get(i).run();
-            }
-            else {
+            } else {
                 for (int i = 0; i < countSteps; i++) {
                     if (points[0] == points[2])
                         pointSteps[0] = points[0];
@@ -420,8 +404,7 @@ public class SequentialDrawFragment extends Fragment {
                     canvas.drawCircle(pointSteps[0], pointSteps[1], widthBrush, paint);
                 }
             }
-        }
-        else
+        } else
             canvas.drawCircle(points[2], points[3], widthBrush, paint);
     }
 
@@ -431,8 +414,8 @@ public class SequentialDrawFragment extends Fragment {
                 (points[2] - firstPoint[0]) / scaleSizeSide <= infoFeaturesKanji.endPointsOfFeatures[currentLine][0] + lengthLine * infoFeaturesKanji.percentErrorsEndPoints[currentLine][0][1] / 100)
             if ((points[3] - firstPoint[1]) / scaleSizeSide >= infoFeaturesKanji.endPointsOfFeatures[currentLine][1] - lengthLine * infoFeaturesKanji.percentErrorsEndPoints[currentLine][1][0] / 100 &&
                     (points[3] - firstPoint[1]) / scaleSizeSide <= infoFeaturesKanji.endPointsOfFeatures[currentLine][1] + lengthLine * infoFeaturesKanji.percentErrorsEndPoints[currentLine][1][1] / 100) {
-                    isLinesDrawn[currentLine] = true;
-                    return true;
+                isLinesDrawn[currentLine] = true;
+                return true;
             }
         return false;
     }
@@ -469,14 +452,18 @@ public class SequentialDrawFragment extends Fragment {
         public void run() {
             super.run();
             if (currentFeature < infoFeaturesKanji.countFeatures) {
-                    while (gifDrawableHalf.getCurrentPosition() < infoFeaturesKanji.timesOfAnim[currentFeature][1] - AREA_ANIM_TIME ||
-                            gifDrawableHalf.getCurrentPosition() > infoFeaturesKanji.timesOfAnim[currentFeature][1] + AREA_ANIM_TIME) {
-                        try {this.sleep(100);} catch (InterruptedException e) {throw new RuntimeException(e);}
-                        continue;
+                while (gifDrawableHalf.getCurrentPosition() < infoFeaturesKanji.timesOfAnim[currentFeature][1] - AREA_ANIM_TIME ||
+                        gifDrawableHalf.getCurrentPosition() > infoFeaturesKanji.timesOfAnim[currentFeature][1] + AREA_ANIM_TIME) {
+                    try {
+                        this.sleep(100);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
                     }
-                    gifDrawableHalf.stop();
-                    gifDrawableHalf.seekTo(infoFeaturesKanji.timesOfAnim[currentFeature][0]);
+                    continue;
                 }
+                gifDrawableHalf.stop();
+                gifDrawableHalf.seekTo(infoFeaturesKanji.timesOfAnim[currentFeature][0]);
+            }
         }
     }
 }

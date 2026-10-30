@@ -2,7 +2,7 @@ package com.example.kanjiapplication.threads;
 
 import java.util.concurrent.CountDownLatch;
 
-public class ThreadString extends MyThreads{
+public class ThreadString extends MyThreads {
 
     private String line;
     private CountDownLatch countDownLatch;
@@ -23,18 +23,19 @@ public class ThreadString extends MyThreads{
     }
 
     @Override
-    public String getLine() { return line; }
+    public String getLine() {
+        return line;
+    }
 
     @Override
     public void run() {
         super.run();
         for (int i = 0; i < countRows + remainder; i++)
             for (int j = 0; j < length; j++)
-                line += String.format("%.2f", image[countRows * numberThread + i][j]).replace(".","").replace(",","");
+                line += String.format("%.2f", image[countRows * numberThread + i][j]).replace(".", "").replace(",", "");
         try {
             countDownLatch.countDown();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

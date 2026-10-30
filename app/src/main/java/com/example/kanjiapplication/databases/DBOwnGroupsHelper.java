@@ -31,7 +31,9 @@ public class DBOwnGroupsHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {int i = 0;}
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        int i = 0;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -52,7 +54,7 @@ public class DBOwnGroupsHelper extends SQLiteOpenHelper {
             OutputStream myOutput = new FileOutputStream(DB_PATH + DB_NAME);
             byte[] buffer = new byte[1024];
             int length;
-            while((length = myInput.read(buffer)) > 0){
+            while ((length = myInput.read(buffer)) > 0) {
                 myOutput.write(buffer, 0, length);
             }
             myOutput.flush();
