@@ -9,11 +9,17 @@
 ## 👥 Состав команды и роли
 | Разработчик | Роль                                                     |
 | :--- |:---------------------------------------------------------|
-| **Максим Парфенов** | Backend/Frontend Java Developer                           |
+| **Максим Парфенов** | Frontend Java / Backend Python Developer                           |
 
 ## 🎬 Видеопрезентация UI
 
 [![Video Thumbnail](https://img.youtube.com/vi/DI4k3xI1zIE/maxresdefault.jpg)](https://www.youtube.com/watch?v=DI4k3xI1zIE)
+
+---
+
+## ☁️ Ссылка на сервер
+
+[https://github.com/maxitool/neural-network-server.git](https://github.com/maxitool/neural-network-server.git)
 
 ---
 
@@ -183,7 +189,7 @@
 *   **CMake Version:** 3.22.1 (встроен в нативный билд-процесс через Android NDK)
 
 ### Сборка клиента
-1. Запустите сервер с ИИ (инструкция по запуску находится здесь ).
+1. Запустите сервер с ИИ (инструкция по запуску находится здесь [https://github.com/maxitool/neural-network-server.git](https://github.com/maxitool/neural-network-server.git)).
 2. Склонируйте репозиторий:
    ```bash
    git clone https://github.com
