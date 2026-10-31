@@ -184,7 +184,7 @@
 1. Запустите сервер с ИИ (инструкция по запуску находится здесь [https://github.com/maxitool/neural-network-server.git](https://github.com/maxitool/neural-network-server.git)).
 2. Склонируйте репозиторий:
    ```bash
-   git clone https://github.com
+   git clone https://github.com/maxitool/kanji-application.git
    ```
 3. Откройте проект в Android Studio.
 4. Дождитесь автоматической синхронизации Gradle и сборки С++ файлов через CMake.
